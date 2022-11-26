@@ -1,0 +1,15 @@
+---
+- hosts: all
+  become: true
+
+  pre_tasks:
+    - name: Vars
+      include_vars: vars.yml
+
+    - name: Install packages
+      import_tasks: tasks/packages.yml
+
+  tasks:
+    - name: Install unifi
+      import_tasks: tasks/unifi.yml
+      when: unifi_preset.rc == 1

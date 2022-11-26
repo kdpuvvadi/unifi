@@ -1,0 +1,43 @@
+---
+
+- name: Run apt cache update & upgrade
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+    state: latest
+
+- name: Run apt install packages
+  ansible.builtin.apt:
+    name:
+      - mongodb
+      - jsvc
+      - curl
+      - openjdk-8-jre-headless
+      - ca-certificates
+      - apt-transport-https
+    state: present
+    update_cache: true
+
+- name: Ensure mongo is running.
+  ansible.builtin.service:
+    name: mongodb
+    state: started
+    enabled: true
+
+- name: Check mongodb install status
+  ansible.builtin.command: which mongodb
+  failed_when: false
+  changed_when: false
+  check_mode: false
+
+- name: Check unifi install status
+  ansible.builtin.command: which tpeap
+  failed_when: false
+  changed_when: false
+  check_mode: false
+  register: unifi_preset
+
+- name: Check if reboot required
+  ansible.builtin.stat:
+    path: /var/run/reboot-required
+  register: reboot_required

@@ -1,0 +1,38 @@
+---
+
+- name: Add unifi apt key
+  ansible.builtin.apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 06E85760C0A52C50
+
+- name: Add unifi repo
+  ansible.builtin.apt_repository:
+    repo: deb https://www.ui.com/downloads/unifi/debian stable ubiquiti
+    state: present
+    filename: 100-ubnt-unifi
+
+- name: Run apt cache update & upgrade
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+    state: latest
+
+- name: Install unifi
+  ansible.builtin.apt:
+    name:
+      - unifi
+    state: present
+    update_cache: true
+
+- name: Reboot
+  ansible.builtin.reboot:
+    post_reboot_delay: 30
+  when: reboot_required.stat.exists
+
+- name: Get my public IP
+  community.general.ipify_facts:
+  register: ip
+
+- name: Get url
+  ansible.builtin.debug:
+    msg: "unifi Controller is running at https://{{ ipify_public_ip }}:8443"
