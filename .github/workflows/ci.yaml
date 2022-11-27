@@ -3,7 +3,10 @@ name: ci
 
 'on':
   pull_request:
+  workflow_dispatch:
   push:
+    branches:
+      - main
 
 jobs:
 
@@ -20,7 +23,7 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install test dependencies.
+      - name: Install yamlint ansible ansible-lint.
         run: pip3 install -r requirements.txt
 
       - name: Run yamllint
