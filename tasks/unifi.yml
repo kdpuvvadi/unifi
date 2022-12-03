@@ -1,28 +1,8 @@
 ---
 
-- name: Add unifi apt key
-  ansible.builtin.apt_key:
-    keyserver: keyserver.ubuntu.com
-    id: 06E85760C0A52C50
-
-- name: Add unifi repo
-  ansible.builtin.apt_repository:
-    repo: deb https://www.ui.com/downloads/unifi/debian stable ubiquiti
-    state: present
-    filename: 100-ubnt-unifi
-
-- name: Run apt cache update & upgrade
+- name: Install unifi from url
   ansible.builtin.apt:
-    update_cache: true
-    cache_valid_time: 3600
-    state: latest
-
-- name: Install unifi
-  ansible.builtin.apt:
-    name:
-      - unifi
-    state: present
-    update_cache: true
+    deb: " {{ unifi_url }} "
 
 - name: Reboot
   ansible.builtin.reboot:
