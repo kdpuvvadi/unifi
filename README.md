@@ -2,6 +2,8 @@
 
 Tested on Control Node Ubuntu 20.04 LTS. Ansible 2.14.0
 
+> This branch installs latest version of unifi controller.
+
 ## Setup Ansible
 
 * Install pip `sudo apt install python3-pip -y`
@@ -16,7 +18,7 @@ Tested on Control Node Ubuntu 20.04 LTS. Ansible 2.14.0
 * `curl`
 * `jsvc`
 * `tar`
-* `ca-certificates` 
+* `ca-certificates`
 * `apt-transport-https`
 
 ## Run
@@ -35,7 +37,6 @@ Tested on Control Node Ubuntu 20.04 LTS. Ansible 2.14.0
 ## Post Install
 
 * unifi controller will be available on `https://HOST-IP:8043/`.
-
 
 ## unifi Service on host
 
