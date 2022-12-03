@@ -1,10 +1,21 @@
 ---
 
 # TODO:
-# add mango repo to list
 # install mangodb 3.4
 
 - name: Add mangodb 3.4 apt key
   ansible.builtin.apt_key:
     url: https://www.mongodb.org/static/pgp/server-3.4.asc
     state: present
+
+- name: Add mangodb repo
+  ansible.builtin.apt_repository:
+    repo: deb https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse
+    state: present
+    filename: mongodb-org-3.4.list
+
+- name: Run apt cache update & upgrade
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+    state: latest
