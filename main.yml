@@ -10,6 +10,10 @@
       import_tasks: tasks/packages.yml
 
   tasks:
+
+    - name: Install mango
+      import_tasks: tasks/mango.yml
+
     - name: Install unifi
       import_tasks: tasks/unifi.yml
       when: unifi_preset.rc == 1
