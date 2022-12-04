@@ -1,11 +1,11 @@
 ---
 
-- name: Add mangodb 3.4 apt key
+- name: Add mongodb 3.4 apt key
   ansible.builtin.apt_key:
     url: https://www.mongodb.org/static/pgp/server-3.4.asc
     state: present
 
-- name: Add mangodb repo
+- name: Add mongodb repo
   ansible.builtin.apt_repository:
     repo: deb https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse
     state: present
@@ -17,7 +17,7 @@
     cache_valid_time: 3600
     state: latest
 
-- name: Run apt install packages
+- name: Run apt install mongodb
   ansible.builtin.apt:
     name:
       - mongodb
