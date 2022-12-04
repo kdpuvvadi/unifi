@@ -12,9 +12,11 @@
     name:
       - jsvc
       - curl
-      - openjdk-8-jre-headless
+      - openjdk-11-jre-headless
       - ca-certificates
       - apt-transport-https
+      - xz-utils
+      - binutils
     state: present
     update_cache: true
 
