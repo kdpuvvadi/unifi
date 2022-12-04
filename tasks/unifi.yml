@@ -1,8 +1,19 @@
 ---
 
-- name: Install unifi from url
+- name: Create directory
+  ansible.builtin.file:
+    path: "{{ config_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: Download unifi deb package
+  ansible.builtin.get_url:
+    url: " {{ unifi_url }} "
+    dest: "{{ config_dir }}/unifi_sysvinit_all.deb"
+
+- name: Install unifi deb
   ansible.builtin.apt:
-    deb: " {{ unifi_url }} "
+    deb: "{{ config_dir }}/unifi_sysvinit_all.deb"
 
 - name: Reboot
   ansible.builtin.reboot:
@@ -12,6 +23,11 @@
 - name: Get my public IP
   community.general.ipify_facts:
   register: ip
+
+- name: Restart service unifi
+  ansible.builtin.service:
+    name: unifi
+    state: restarted
 
 - name: Get url
   ansible.builtin.debug:
