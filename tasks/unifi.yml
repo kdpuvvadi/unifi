@@ -10,6 +10,7 @@
   ansible.builtin.get_url:
     url: " {{ unifi_url }} "
     dest: "{{ config_dir }}/unifi_sysvinit_all.deb"
+    mode: 0775
 
 - name: Install unifi deb
   ansible.builtin.apt:
