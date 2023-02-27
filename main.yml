@@ -4,16 +4,16 @@
 
   pre_tasks:
     - name: Vars
-      include_vars: vars.yml
+      ansible.builtin.include_vars: vars.yml
 
     - name: Install packages
-      import_tasks: tasks/packages.yml
+      ansible.builtin.import_tasks: tasks/packages.yml
 
   tasks:
 
     - name: Install mango
-      import_tasks: tasks/mango.yml
+      ansible.builtin.import_tasks: tasks/mango.yml
 
     - name: Install unifi
-      import_tasks: tasks/unifi.yml
+      ansible.builtin.import_tasks: tasks/unifi.yml
       when: unifi_preset.rc == 1
