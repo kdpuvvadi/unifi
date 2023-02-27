@@ -38,6 +38,7 @@ Tested on Control Node Ubuntu 20.04 LTS. Ansible 2.14.0
 
 ## Releases
 
+* [v7.3.83](../../releases/v7.3.83)
 * [v7.3.76](../../releases/v7.3.76)
 
 ## unifi Service on host
